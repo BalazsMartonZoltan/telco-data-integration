@@ -12,7 +12,7 @@ public record RawProduct(
         BigDecimal vatRate,
         Integer stock,
         String ean,
-        Instant updateAt,
+        Instant updatedAt,
         ProductSource source
 ) {
 }
