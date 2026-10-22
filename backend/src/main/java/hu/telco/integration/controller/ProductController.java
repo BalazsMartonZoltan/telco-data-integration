@@ -1,10 +1,8 @@
 package hu.telco.integration.controller;
 
-import hu.telco.integration.reconciliation.ReconciledProduct;
+import hu.telco.integration.dto.ProductResponse;
 import hu.telco.integration.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +17,11 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ReconciledProduct> getProducts() {
-        return productService.findAll();
+    public List<ProductResponse> getProducts(
+            @RequestParam(required = false) String filter,
+            @RequestParam(defaultValue = "sku") String sort,
+            @RequestParam(defaultValue = "false") boolean onlyValid) {
+
+        return productService.getProducts(filter, sort, onlyValid);
     }
 }
