@@ -50,67 +50,110 @@ export default function App() {
   }, [filter, sort, onlyValid]);
 
   return (
-      <main className="container">
-        <header>
-          <h1>Telco Data Integration</h1>
-          <p>
-            Unified product catalogue with validation
-            and source conflict detection.
-          </p>
+      <div className="min-vh-100 bg-body-tertiary">
+        <header className="bg-white border-bottom py-4 mb-4">
+          <div className="container">
+            <h1 className="h3 fw-bold mb-2">
+              Telco Data Integration
+            </h1>
+
+            <p className="text-secondary mb-0">
+              Unified product catalogue with validation and conflict detection.
+            </p>
+          </div>
         </header>
 
-        <section className="toolbar">
-          <label>
-            Search
-            <input
-                type="search"
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-                placeholder="SKU, name or manufacturer"
-            />
-          </label>
+        <main className="container pb-5">
+          <div className="card border-0 shadow-sm mb-4">
+            <div className="card-body">
+              <div className="row g-3 align-items-end">
+                <div className="col-12 col-md-5">
+                  <label htmlFor="product-search" className="form-label">
+                    Search products
+                  </label>
 
-          <label>
-            Sort by
-            <select
-                value={sort}
-                onChange={(e) =>
-                    setSort(e.target.value as ProductSort)
-                }
-            >
-              <option value="sku">SKU</option>
-              <option value="name">Name</option>
-              <option value="price">Price</option>
-              <option value="stock">Stock</option>
-            </select>
-          </label>
+                  <input
+                      id="product-search"
+                      type="search"
+                      className="form-control"
+                      value={filter}
+                      onChange={e => setFilter(e.target.value)}
+                      placeholder="SKU, name or manufacturer"
+                  />
+                </div>
 
-          <label className="checkbox-label">
-            <input
-                type="checkbox"
-                checked={onlyValid}
-                onChange={(e) => setOnlyValid(e.target.checked)}
-            />
-            Only valid products
-          </label>
-        </section>
+                <div className="col-12 col-md-3">
+                  <label htmlFor="product-sort" className="form-label">
+                    Sort by
+                  </label>
 
-        {loading && <p>Loading products...</p>}
+                  <select
+                      id="product-sort"
+                      className="form-select"
+                      value={sort}
+                      onChange={e =>
+                          setSort(e.target.value as ProductSort)
+                      }
+                  >
+                    <option value="sku">SKU</option>
+                    <option value="name">Name</option>
+                    <option value="price">Price</option>
+                    <option value="stock">Stock</option>
+                  </select>
+                </div>
 
-        {error && (
-            <p role="alert" className="error">
-              {error}
-            </p>
-        )}
+                <div className="col-12 col-md-4">
+                  <div className="form-check mb-2">
+                    <input
+                        id="only-valid"
+                        type="checkbox"
+                        className="form-check-input"
+                        checked={onlyValid}
+                        onChange={e => setOnlyValid(e.target.checked)}
+                    />
 
-        {!loading && !error && (
-            <>
-              <p className="result-count">
-                {products.length} products found
-              </p>
-              <ProductTable products={products} />
-            </>
-        )}
-      </main>
+                    <label
+                        htmlFor="only-valid"
+                        className="form-check-label"
+                    >
+                      Only valid products
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {loading && (
+              <div className="d-flex align-items-center gap-2 py-4">
+                <div
+                    className="spinner-border spinner-border-sm text-primary"
+                    role="status"
+                />
+                <span>Loading products...</span>
+              </div>
+          )}
+
+          {error && (
+              <div className="alert alert-danger" role="alert">
+                {error}
+              </div>
+          )}
+
+          {!loading && !error && (
+              <>
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <h2 className="h5 mb-0">Products</h2>
+
+                  <span className="badge text-bg-secondary">
+              {products.length} products
+            </span>
+                </div>
+
+                <ProductTable products={products} />
+              </>
+          )}
+        </main>
+      </div>
   );
 }

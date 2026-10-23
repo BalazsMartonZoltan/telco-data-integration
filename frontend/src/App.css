@@ -1,161 +1,20 @@
-:root {
-  font-family: Inter, system-ui, sans-serif;
-  color: #1e293b;
-  background: #f5f7fb;
+.details-row > td {
+  background-color: #f8fafc !important;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px;
-}
-
-header {
-  margin-bottom: 32px;
-}
-
-header h1 {
-  margin-bottom: 8px;
-}
-
-header p {
+.details-row dl dt {
   color: #64748b;
-}
-
-.toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  gap: 20px;
-  margin-bottom: 24px;
-}
-
-.toolbar label {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   font-weight: 500;
 }
 
-input,
-select {
-  padding: 10px 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  background: white;
-  font: inherit;
-}
-
-.checkbox-label {
-  flex-direction: row !important;
-  align-items: center;
-  padding-bottom: 10px;
-}
-
-.table-container {
-  overflow-x: auto;
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-}
-
-th,
-td {
-  padding: 14px 16px;
-  border-bottom: 1px solid #e2e8f0;
-  vertical-align: top;
-}
-
-th {
-  background: #f8fafc;
-  font-size: 13px;
-  color: #475569;
-}
-
-.status {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-}
-
-.badge {
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 5px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.valid {
-  color: #166534;
-  background: #dcfce7;
-}
-
-.invalid {
-  color: #991b1b;
-  background: #fee2e2;
-}
-
-.conflict {
-  color: #92400e;
-  background: #fef3c7;
-}
-
-details {
-  position: relative;
-}
-
-summary {
-  cursor: pointer;
-  color: #2563eb;
-}
-
-.details-content {
-  margin-top: 12px;
-  min-width: 260px;
-  font-size: 13px;
-}
-
-.source-record {
-  padding: 10px;
-  margin: 10px 0;
-  background: #f8fafc;
-  border-radius: 6px;
-}
-
-.source-record p {
-  margin: 5px 0;
-}
-
-.issues {
-  padding: 8px;
-  margin: 6px 0;
-  border-radius: 5px;
-  color: #92400e;
-  background: #fffbeb;
+.details-row dl dd {
   overflow-wrap: anywhere;
 }
 
-.error {
-  color: #b91c1c;
+.table > :not(caption) > * > * {
+  padding: 0.85rem 1rem;
 }
 
-.result-count,
-.empty {
-  color: #64748b;
+.details-row .table > :not(caption) > * > * {
+  padding: 0.4rem 0.6rem;
 }
