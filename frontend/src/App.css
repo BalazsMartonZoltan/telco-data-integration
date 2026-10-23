@@ -1,0 +1,20 @@
+.details-row > td {
+  background-color: #f8fafc !important;
+}
+
+.details-row dl dt {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.details-row dl dd {
+  overflow-wrap: anywhere;
+}
+
+.table > :not(caption) > * > * {
+  padding: 0.85rem 1rem;
+}
+
+.details-row .table > :not(caption) > * > * {
+  padding: 0.4rem 0.6rem;
+}
