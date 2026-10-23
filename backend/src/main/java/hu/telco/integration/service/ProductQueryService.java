@@ -2,6 +2,7 @@ package hu.telco.integration.service;
 
 import hu.telco.integration.dto.ProductRecordResponse;
 import hu.telco.integration.dto.ProductResponse;
+import hu.telco.integration.dto.ProductSort;
 import hu.telco.integration.reconciliation.ReconciledProduct;
 import hu.telco.integration.validation.ValidationResult;
 import org.springframework.stereotype.Component;
@@ -33,34 +34,26 @@ public class ProductQueryService {
                                 || contains(record.sku(), query));
     }
 
-    public Comparator<ProductResponse> comparatorFor(String sort) {
-        String field = sort == null || sort.isBlank()
-                ? "sku"
-                : sort.toLowerCase(Locale.ROOT);
-
-        return switch (field) {
-            case "sku" -> Comparator.comparing(
+    public Comparator<ProductResponse> getComparator(ProductSort sort) {
+        return switch (sort) {
+            case SKU -> Comparator.comparing(
                     ProductResponse::sku,
-                    Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER)
+                    Comparator.nullsLast(String::compareTo)
             );
 
-            case "name" -> Comparator.comparing(
+            case NAME -> Comparator.comparing(
                     product -> firstRecord(product).name(),
                     Comparator.nullsLast(String.CASE_INSENSITIVE_ORDER)
             );
 
-            case "price" -> Comparator.comparing(
+            case PRICE -> Comparator.comparing(
                     product -> firstRecord(product).finalPriceHuf(),
                     Comparator.nullsLast(BigDecimal::compareTo)
             );
 
-            case "stock" -> Comparator.comparing(
+            case STOCK -> Comparator.comparing(
                     product -> firstRecord(product).stock(),
                     Comparator.nullsLast(Integer::compareTo)
-            );
-
-            default -> throw new IllegalArgumentException(
-                    "Unsupported sort field: " + sort
             );
         };
     }

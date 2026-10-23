@@ -1,6 +1,7 @@
 package hu.telco.integration.service;
 
 import hu.telco.integration.dto.ProductResponse;
+import hu.telco.integration.dto.ProductSort;
 import hu.telco.integration.entity.ProductEntity;
 import hu.telco.integration.mapper.ProductResponseMapper;
 import hu.telco.integration.model.NormalizedProduct;
@@ -50,14 +51,14 @@ public class ProductService {
     @Transactional(readOnly = true)
     public List<ProductResponse> getProducts(
             String filter,
-            String sort,
+            ProductSort sort,
             boolean onlyValid) {
 
         return findAll().stream()
                 .filter(product -> !onlyValid || product.isValid())
                 .filter(product -> queryService.matchesFilter(product, filter))
                 .map(responseMapper::toResponse)
-                .sorted(queryService.comparatorFor(sort))
+                .sorted(queryService.getComparator(sort))
                 .toList();
     }
 
